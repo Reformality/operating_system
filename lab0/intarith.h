@@ -1,0 +1,1 @@
+#define MOD128(X) ((char *) ((unsigned int)X & 127))

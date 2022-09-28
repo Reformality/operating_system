@@ -1,0 +1,18 @@
+1) There will be 30000 attempts to increment global variable total.
+2) t1 should be 10000 because it is the first function that increment
+the total count and it only increments the count by 10000.
+3) The process excuting incr1 finish first because it has the lowest
+total count of 10000.
+4) The value of variable total is what I expected because counting
+10000 is so short for the CPU to perform context switch.
+5) The value is not expected 900000, instead, it only counts to 600000.
+6) When NITER is equal to 120000, t1 is 120000, t2 is 240000, t3 is 
+360000, and total is 360000.
+7) When NITER is equal to 150000, t1 is 150000, t2 is 300000, t3 is 
+300000, and total is 300000.
+8) When NITER is equal to 185000, t1 is 185000, t2 is 370000, t3 is 
+370000, and total is 370000.
+9) 
+10) I added mutual exclusion by inserting wait(semid) before the
+++ and inserting signal(semid) after the ++. And, Yes,
+it results in correct values for total in all cases.

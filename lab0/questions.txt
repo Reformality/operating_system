@@ -1,0 +1,15 @@
+1. The values for character a is valid.
+
+2. I expect the hex output to be 0xfe, but the printf outputs fffffffe.
+
+3. The hex obtained for c3 is fffffffe because the 0xfe in decimal is -2. Since the
+OS is 32 bit, the 32 bit/4 byte representation of -2 is fffffffe.
+
+4. The x value in decimal is 49407, and in hex is c0ff.
+
+5. The expressoin ~255 produce -256 in decimal, and ffffff00 in hex.
+
+6. The result is 127. This is because -1 is 1111 1111 in binary. When this number
+is & with (128-1), the result is 127. 
+
+7. One more bit-wise operation is needed to test for a power of two.

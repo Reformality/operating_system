@@ -1,0 +1,39 @@
+1) The output starts when entering "print" and stop after enter something else.
+2) When enter "quit", the output stops. To enter "print" again, the output still
+does not continue printing.
+3) Two processes have their own stack that stores the counter. They will not interfering with each other.
+4) The approach used in Part 2 is better than the part 1 because in part 1 the processes are busy waiting
+when the globle variable is set to false.
+5) If part2's processes are assigned with priority 9, then they will not run. This is because part1's 
+priority is 10, and it is greater than part2's 9.
+6) the processes will return SYSERR after each input. However, it does not affect the output since SYSERR is not printed.
+7) When the process is already suspended, a call to suspend will return SYSERR. When the process is already resumed, 
+a call to resume will return SYSERR.
+8) Before suspend or resume a process, first check whether they are already suspended or resumed. If so, then do nothing.
+9) It is possible. When the first process is suspended, system call resche() and move second process to current. Right
+before resche() is called, it is possible that first one is suspended while second one is ready.
+10) 
+main() {
+    Linklist list;
+    p1 = create(func, size, prio, name, numOfInput, input)
+    p2 = create(func, size, prio, name, numOfInput, input)
+    add p1 to list;
+    add p2 to list;
+
+    while (TRUE) {
+		if(read from CONSOLE is "print") {
+			for all items in list {
+                resume(items); 
+            }
+		} else if (read from CONSOLE is "stop printing") == 0) {
+			for all items in list {
+                suspend(items); 
+            }
+		} else if (read from CONSOLE is "new process X") {
+			px = create(func, size, prio, name, numOfInput, input)
+            add px to list;
+		}
+    }
+
+    return OK;
+}

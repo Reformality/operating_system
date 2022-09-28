@@ -1,0 +1,3 @@
+(1) My implementation correctly receive four messages. Those four messages are the pid of dx processes when they exit.
+(2) I expeced to receive 4 messages, plus 4 other pid return when dx2 processes exit.
+(3) 

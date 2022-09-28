@@ -1,0 +1,22 @@
+1) Before running step 8, I expect the output to be alternating
+but random print out of A's, B's, and C's.
+
+2) When I ran Step 8, the output is alternating print out of A's,
+B's and C's, and they all print out the same number of letters 
+each iteration. In the the, when sleep(4) ends, the main process
+take over.
+
+3) Step 8 output has a mix of A, B, C, but the step 9 output prints
+all the A's first, and then alternating printing B's and C's.
+This is because printing A now has higher priority, even higher 
+than the main process. Thus, it will always be at the front of 
+the ready list, which means it will be run until it finishs.
+
+4) Similar to Step 9 where it prints all the A's first, Step 10
+prints all the C's first.
+
+5) The output using "printf" is different from the output from 
+"kprintf". The output from "printf" doesn't not follow the alternating
+pattern discussed above. It prints out letter in a batch, but 
+sometimes it adds in another letter.
+
