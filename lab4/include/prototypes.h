@@ -599,9 +599,15 @@ extern	void	xdone(void);
 /* in file yield.c */
 extern	syscall	yield(void);
 
+/* ADDED FUNCTIONS FOR LAB 4 */
+
 /* in file lab4_functions.c */
 extern void dx(void);
 extern void dx2(int32, int32, int32);
+extern void msgprint(void);
+
+/* in file sendlm.c */
+extern	syscall	sendlm(pid32, umsg32);
 
 /* NETWORK BYTE ORDER CONVERSION NOT NEEDED ON A BIG-ENDIAN COMPUTER */
 #define	htons(x)   ( ( 0xff & ((x)>>8) ) | ( (0xff & (x)) << 8 ) )
