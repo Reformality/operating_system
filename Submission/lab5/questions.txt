@@ -1,1 +1,7 @@
-(1) 
+(1) I used the prstkbase to get the pointer to the highest byte address of the stack, 
+and prstklen to get the length of the stack in bytes. With those two values, I can 
+calculate the lowest address of the stack.
+(2) 
+(3) I made the temporary storage the size of number of active processes times int32. Since
+we are only printing out the active processes, I kept a counter to record how many of them are
+active. Then, I simply need to store them so I created an int array big enough for their address.
