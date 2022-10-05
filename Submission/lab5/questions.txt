@@ -1,7 +1,14 @@
 (1) I used the prstkbase to get the pointer to the highest byte address of the stack, 
 and prstklen to get the length of the stack in bytes. With those two values, I can 
 calculate the lowest address of the stack.
-(2) 
+(2) The largest number for int32 is 0x7FFFFFFF.
 (3) I made the temporary storage the size of number of active processes times int32. Since
 we are only printing out the active processes, I kept a counter to record how many of them are
 active. Then, I simply need to store them so I created an int array big enough for their address.
+(4) It is not included because we never count in the size of memlist. It is just a head node for
+easy searching and it doesn't contain any free space. My computed total free memory agree With
+the total in memblock. This is because memblock and the number we get all shows how many bytes
+our free list has. 
+(5) I need B bytes for blocks' address, B bytes for blocks' size, and K bytes for existing processes'
+address, and K bytes for existing processes' size. In total, I need (2B+2K) bytes of temporary storage
+to compute the answer.
