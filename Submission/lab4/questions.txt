@@ -1,3 +1,25 @@
 (1) My implementation correctly receive four messages. Those four messages are the pid of dx processes when they exit.
 (2) I expeced to receive 4 messages, plus 4 other pid return when dx2 processes exit.
-(3) 
+(3) In step 3, I receive four messages that are generated form dx2 functions. The message passing is working correctly.
+(4) I excepted to receive four messages and 4 pid returns from dx2 processes.
+(5) I had runs that are returning 1,2,3 messages across miltiple runs.
+(6) It is possible because the random number generator could possibly generate numbers that are the same as the dx2 pid. 
+If one of the process return that number, the loop in main will think that one of the dx2 process has already been returned. 
+(7) It is not possible because one of the dx2 process will return before the fourth random generated number to send to the main process.
+This means that at least one process can exit.
+(8) When changing dx2 processes' priority to 50, dx2 processes will run before main process. When more than one dx2 processes send message
+to main, some of those message will not received by the main process. This cause some of the pid that dx2 processes returned not passing to
+main process, thus the main's loop keep looping and not printing out the "received all four PIDs   total messages received is N" message.
+(9) Before running the system, I expect the output to be: main will return before two msgprint process,
+and the msgprint process only got the first message that main pass on to them.
+After running the system, the main exits first, the two msgprint processes exit after the main. The
+two msgprint processes only obtained 0 and 1, which are first two message that the main process pass 
+to them. And two msgprint process never exit because the message is not greater than 4.
+(10) Before running the system, I expect msgprint processes to return the last message the main send them.
+After running the system, the output is:
+main process exits
+5 got 8
+5 exits
+6 got 9
+6 exits
+The main process return first, then two msgprint processes exit after.

@@ -1,0 +1,23 @@
+/*  main.c  - main */
+
+#include <xinu.h>
+
+process	main(void)
+{
+	pid32 msgprintP1 = create(msgprint, 8192, 22, "dx2_1", 0);
+	resume(msgprintP1);
+	pid32 msgprintP2 = create(msgprint, 8192, 22, "dx2_2", 0);
+	resume(msgprintP2);
+
+	int32 mnum = 0;
+	int i;
+	for (i = 0; i < 5; i++) {
+		sendlm(msgprintP1, mnum);
+		mnum++;
+		sendlm(msgprintP2, mnum);
+		mnum++;
+	}
+	kprintf("main process exits\n");
+
+	return OK;
+}
