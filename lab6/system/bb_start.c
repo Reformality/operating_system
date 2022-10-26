@@ -6,4 +6,9 @@
 
 int32 bb_start() {
 	/* Your code here */
+	if (bb.bbState != BB_INIT) {
+		return SYSERR;
+	}
+
+	bb.bbState = BB_RUN;
 }

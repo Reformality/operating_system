@@ -12,10 +12,17 @@ int32 bb_init() {
 		return SYSERR;
 	}
 
+	int i;
+	for (i = 0; i < BB_SIZE; i++) {
+		bb.bbList[i] = '\0';
+	}
+
 	bb.bbListHead = 0;
-	bb.bbListTail = BB_SIZE - 1;
+	bb.bbListTail = 0;
 	bb.bbPsem = semcreate(BB_SIZE);
 	bb.bbCsem = semcreate(0);
 	bb.bbState = BB_INIT;
+	bb.bbCount = 0;
 
+	return OK;
 }
