@@ -1,2 +1,13 @@
 Lab 6 Answers
 
+(1) Step 3 worked for transferring zero bytes and CS354
+(2) Step 4 worked when transferring BB_SIZE bytes, in this case, it transferred 20 bytes in order. 
+(3) Step 5 successfully transferred 300 bytes and 3*BB_SIZE+25 bytes.
+(4) Step 6 successfully transferred all bytes with an initial delay in the producer process.
+(5) Step 6 successfully transferred all bytes with an initial delay in the consumer process.
+(6) Step 7 reports correct counts for both As and Bs.
+(7) I added a send() to producer2 and receive() to producer 1. P2 will send a message to P1 when P2 finish
+inserting all of Bs. After receive() in P1, I then called bb_endinsert().
+(8) Step 8 report the correct number for each characters.
+(9) I added a send() to consumer2 and receive() to consumer1. C2 will send a message to C1 when C2 finish. 
+After receive() in P1, I then called bb_endextract().
