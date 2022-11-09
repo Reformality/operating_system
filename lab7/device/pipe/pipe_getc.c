@@ -13,12 +13,11 @@ devcall	pipe_getc(
 	char	ch;			/* byte of data from the buffer	*/
 	struct	pipecblk *piptr;	/* Pointer to pipe control block*/
 
-
 	/* Get a pointer to the control block for this pipe */
 
 	piptr = &pipetab[devptr->dvminor];
 
-	/* Check if pipe is closed or at EOF */
+	/* Check if pipe is not in use or at EOF */
 
 	if (piptr->pstate == PIPE_FREE) {
 		/* The pipe is not available */
@@ -26,31 +25,44 @@ devcall	pipe_getc(
 
 	}
 	if (piptr->pstate == PIPE_EOF) {
-		/* The writer has indicated EOF */
-		if (semcount(piptr->pcsem) <= 0) {
+
+		/* The writer closed the pipe, so return bytes while	*/
+		/* any remain in the buffer.				*/
+
+		if (semcount(piptr->pcsem) > 0) {
+			wait(piptr->pcsem);
+			ch = piptr->pbuf[piptr->phead++];
+			if (piptr->phead >= PIPE_BUF_SIZE) {
+				piptr->phead = 0;
+			}
+			return 0xff & ch;
+		}
+		return EOF;
+
+	}
+
+	/* State is OPEN -- Wait for a byte to be available or a close	*/
+
+	wait(piptr->pcsem);
+
+	/* If the state changed while we were blocked, the producer must*/
+	/* have called close, possibly after writing bytes to the pipe.	*/
+
+	if (piptr->pstate == PIPE_EOF) {
+		if (piptr->phead == piptr->ptail) {
+			/* The buffer is empty */
 			return EOF;
 		}
 	}
 
-	/* Wait for a byte to be available */
-
-	wait(piptr->pcsem);
-
-	/* See if pipe was completely closed while we were blocked */
-
-	if (piptr->pstate == PIPE_FREE) {
-		/* Pipe is now closed */
-		return SYSERR;
-	}
-
-	/* Pick up the byte */
+	/* A byte is available to be read -- pick up and return the byte*/
 
 	ch = piptr->pbuf[piptr->phead++];
 	if (piptr->phead >= PIPE_BUF_SIZE) {
 		piptr->phead = 0;
 	}
 
-	/* signal the producer semphore and return the byte */
+	/* signal the producer and return the byte */
 
 	signal(piptr->ppsem);
 	return 0xff & ch;

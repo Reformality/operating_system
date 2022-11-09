@@ -599,6 +599,27 @@ extern	void	xdone(void);
 /* in file yield.c */
 extern	syscall	yield(void);
 
+/* in file pipe_init.c */
+devcall	pipe_init(struct dentry	*);
+
+/* in file pipe_getc.c */
+extern devcall pipe_getc(struct dentry	*);
+
+/* in file pipe_putc.c */
+extern devcall pipe_putc(struct dentry	*, char);
+
+/* in file pipe_open.c */
+extern devcall pipe_open(struct dentry *, char *, char *);
+
+/* in file pipe_write.c */
+extern devcall pipe_write(struct dentry *, char *, int32 );
+
+/* in file pipe_read.c */
+extern devcall pipe_read(struct dentry *, char *, int32 );
+
+/* in file pipe_close.c */
+extern devcall pipe_close(struct dentry *);
+
 /* NETWORK BYTE ORDER CONVERSION NOT NEEDED ON A BIG-ENDIAN COMPUTER */
 #define	htons(x)   ( ( 0xff & ((x)>>8) ) | ( (0xff & (x)) << 8 ) )
 #define	htonl(x)   ( (((x)>>24) & 0x000000ff) | (((x)>> 8) & 0x0000ff00) | \

@@ -17,6 +17,24 @@
 
 /* Type Declarations for both real- and pseudo- device types */
 
+/* type of a pip device */
+mpip:
+	on nothing
+		-i ioerr	-o pipe_open	-c ioerr
+		-r ioerr	-g ioerr	-p ioerr
+		-w ioerr	-s ioerr	-n ioerr
+		-intr ioerr
+
+
+/* type of a pip device */
+pip:
+	on mpip
+		-i pipe_init	-o ioerr	-c pipe_close
+		-r pipe_read	-g pipe_getc	-p pipe_putc
+		-w pipe_write	-s ioerr	-n ioerr
+		-intr ioerr
+
+
 /* type of a null device */
 null:
 	on nothing
@@ -115,6 +133,7 @@ spi:
 		-intr ionull
 %%
 
+
 /* Actual device declarations that each give the name of a device that	*/
 /*   will be present in the system					*/
 
@@ -152,6 +171,22 @@ spi:
    RFILE7 is rfl on rfs
    RFILE8 is rfl on rfs
    RFILE9 is rfl on rfs
+
+   /* Define master PIPE */
+   PIPE is mpip on nothing
+
+   /* Define PIPE */
+
+   PIPE0 is pip on mpip
+   PIPE1 is pip on mpip
+   PIPE2 is pip on mpip
+   PIPE3 is pip on mpip
+   PIPE4 is pip on mpip
+   PIPE5 is pip on mpip
+   PIPE6 is pip on mpip
+   PIPE7 is pip on mpip
+   PIPE8 is pip on mpip
+   PIPE9 is pip on mpip
 
    /* Define the local file system master device (one per system) */
 
