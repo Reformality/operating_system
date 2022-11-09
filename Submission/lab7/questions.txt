@@ -1,0 +1,14 @@
+(1) I kept the pipe status in the pipetab, so pipe_open knows
+when a pipe can be opened by checking whether the pstate is PIPE_FREE
+(2) The field of pipe_open does not contain the device descriptor. It was generated
+after testing for free pipe.
+(3) The return value is the device id of the opened pipe.
+(4) Npip represents the number of available pipes will be initialized at startup.
+It is defined in conf.h as value of 10. It is inserted into the file in pipe_init.c.
+(5) it only waits on the semaphores if the state is OPEN.
+(6) it must check the semaphore in case the state changed while being blocked.
+(7) 
+(8) First, add PIPE10 and PIPE 11 to the configuration file. Then, change the Npip
+to 12. 
+(9) First, add the function to prototypes.h. Then, change the configuration file
+by switching pipe_close to pipe_opt_close.
