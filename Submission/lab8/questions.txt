@@ -1,0 +1,8 @@
+Lab8 Questions.txt
+
+(1) rfserver.c indicates that any substring with ".." will be ignored and return error
+(2) I only need to change the rfilesys.h file and recompile
+(3) Yes since they have the file in the same folder.
+(4) Yes it can. It can rewrite bytes based on byte offset. 
+(5) The advantage of using include file is that the remote file system can be set up during start up. 
+The disadvantage is that it cannot be changed while Xinu is running. It requires to recompile the OS. 
